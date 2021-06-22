@@ -21,6 +21,7 @@ kona-qrd-overlay.dtbo-base := kona.dtb kona-v2.dtb kona-v2.1.dtb
 kona-xrfusion-overlay.dtbo-base := kona.dtb kona-v2.dtb kona-v2.1.dtb
 kona-xrfusion-ult-overlay.dtbo-base := kona.dtb kona-v2.dtb kona-v2.1.dtb
 kona-hdk-overlay.dtbo-base := kona.dtb kona-v2.dtb kona-v2.1.dtb
+
 else
 dtb-$(CONFIG_ARCH_KONA) += kona-rumi.dtb \
         kona-mtp.dtb \
@@ -48,7 +49,7 @@ dtb-$(CONFIG_ARCH_KONA) += kona-rumi.dtb \
 	kona-v2.1-xrfusion-ult.dtb
 endif
 
-ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
+ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY_NOT_OEM),y)
 dtbo-$(CONFIG_ARCH_LITO) += lito-rumi-overlay.dtbo \
                 lito-mtp-overlay.dtbo \
                 lito-v2-mtp-overlay.dtbo \
@@ -70,6 +71,24 @@ lito-v2-atp-overlay.dtbo-base := lito-v2.dtb
 lito-v2-atp-lcd-overlay.dtbo-base := lito-v2.dtb
 lito-qrd-overlay.dtbo-base := lito.dtb
 lito-v2-qrd-overlay.dtbo-base := lito-v2.dtb
+
+else
+ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
+        dtbo-$(CONFIG_ARCH_LITO) += \
+                avicii-overlay-t0.dtbo \
+                avicii-overlay-evt1.dtbo \
+                avicii-overlay-dvt.dtbo \
+                avicii-overlay-dvt-v2.1.dtbo \
+                avicii-overlay-pvt.dtbo \
+                avicii-overlay-pvt-v2.1.dtbo
+
+avicii-overlay-t0.dtbo-base := lito.dtb
+avicii-overlay-evt1.dtbo-base := lito.dtb
+avicii-overlay-dvt.dtbo-base := lito.dtb
+avicii-overlay-dvt-v2.1.dtbo-base := lito.dtb
+avicii-overlay-pvt.dtbo-base := lito.dtb
+avicii-overlay-pvt-v2.1.dtbo-base := lito.dtb
+
 else
 dtb-$(CONFIG_ARCH_LITO) += lito-rumi.dtb \
                 lito-mtp.dtb \
@@ -82,6 +101,12 @@ dtb-$(CONFIG_ARCH_LITO) += lito-rumi.dtb \
                 lito-v2-atp-lcd.dtb \
                 lito-v2-qrd.dtb
 endif
+endif
+
+WT_FEATURE_ENABLE_DTC :=
+ifeq ($(CONFIG_WT_SYSTEM_MONITOR),y)
+    WT_FEATURE_ENABLE_DTC += -DWT_SYSTEM_MONITOR
+endif
 
 ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 dtbo-$(CONFIG_ARCH_LAGOON) += \
@@ -90,14 +115,14 @@ dtbo-$(CONFIG_ARCH_LAGOON) += \
 		lagoon-mtp-usbc-overlay.dtbo \
 		lagoon-cdp-overlay.dtbo \
 		lagoon-atp-overlay.dtbo \
-		lagoon-qrd-overlay.dtbo
+		billie8-qrd-overlay.dtbo
 
 lagoon-rumi-overlay.dtbo-base := lagoon.dtb
 lagoon-mtp-overlay.dtbo-base := lagoon.dtb
 lagoon-mtp-usbc-overlay.dtbo-base := lagoon.dtb
 lagoon-cdp-overlay.dtbo-base := lagoon.dtb
 lagoon-atp-overlay.dtbo-base := lagoon.dtb
-lagoon-qrd-overlay.dtbo-base := lagoon.dtb
+billie8-qrd-overlay.dtbo-base := lagoon.dtb
 else
 dtb-$(CONFIG_ARCH_LAGOON) += \
 		lagoon-rumi.dtb \

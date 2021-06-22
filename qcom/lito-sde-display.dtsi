@@ -19,6 +19,9 @@
 #include "dsi-panel-sim-dualmipi-dsc375-cmd.dtsi"
 #include "dsi-panel-sim-sec-hd-cmd.dtsi"
 #include "dsi-panel-rm69299-visionox-fhd-plus-video.dtsi"
+#include "dsi-panel-samsung_ams644vk04_fhd_dsc.dtsi"
+#include "dsi-panel-samsung_ams644vk04_ana6705_fhd_dsc.dtsi"
+#include "dsi-panel-samsung_sofef00_m_video.dtsi"
 #include "dsi-panel-r66451-dsc-fhd-plus-144hz-cmd.dtsi"
 #include <dt-bindings/clock/mdss-7nm-pll-clk.h>
 
@@ -67,26 +70,54 @@
 			qcom,supply-disable-load = <0>;
 			qcom,supply-post-on-sleep = <0>;
 		};
+		qcom,panel-supply-entry@2 {
+			reg = <2>;
+			qcom,supply-name = "vout";
+			qcom,supply-min-voltage = <1200000>;
+			qcom,supply-max-voltage = <1200000>;
+			qcom,supply-enable-load = <857000>;
+			qcom,supply-disable-load = <0>;
+			qcom,supply-post-on-sleep = <0>;
+		};
+	};
+
+	dsi_panel_pwr_supply_samsung: dsi_panel_pwr_supply_samsung {
+		#address-cells = <1>;
+		#size-cells = <0>;
+
+		qcom,panel-supply-entry@0 {
+			reg = <0>;
+			qcom,supply-name = "vddio";
+			qcom,supply-min-voltage = <1800000>;
+			qcom,supply-max-voltage = <1800000>;
+			qcom,supply-enable-load = <62000>;
+			qcom,supply-disable-load = <80>;
+			qcom,supply-post-on-sleep = <20>;
+		};
+
+		qcom,panel-supply-entry@1 {
+			reg = <1>;
+			qcom,supply-name = "vout";
+			qcom,supply-min-voltage = <1280000>;
+			qcom,supply-max-voltage = <1280000>;
+			qcom,supply-enable-load = <857000>;
+			qcom,supply-disable-load = <0>;
+			qcom,supply-post-on-sleep = <20>;
+		};
+
 
 		qcom,panel-supply-entry@2 {
 			reg = <2>;
-			qcom,supply-name = "lab";
-			qcom,supply-min-voltage = <4600000>;
-			qcom,supply-max-voltage = <6000000>;
-			qcom,supply-enable-load = <100000>;
-			qcom,supply-disable-load = <100>;
+			qcom,supply-name = "vdd";
+			qcom,supply-min-voltage = <3000000>;
+			qcom,supply-max-voltage = <3000000>;
+			qcom,supply-enable-load = <857000>;
+			qcom,supply-disable-load = <0>;
+			qcom,supply-post-on-sleep = <0>;
 		};
 
-		qcom,panel-supply-entry@3 {
-			reg = <3>;
-			qcom,supply-name = "ibb";
-			qcom,supply-min-voltage = <4600000>;
-			qcom,supply-max-voltage = <6000000>;
-			qcom,supply-enable-load = <100000>;
-			qcom,supply-disable-load = <100>;
-			qcom,supply-post-on-sleep = <20>;
-		};
 	};
+
 
 	dsi_panel_pwr_supply_avdd: dsi_panel_pwr_supply_avdd {
 		#address-cells = <1>;
@@ -194,13 +225,16 @@
 		qcom,platform-te-gpio = <&tlmm 10 0>;
 		qcom,panel-te-source = <0>;
 
+
 		vddio-supply = <&L1C>;
 		vdd-supply = <&L16A>;
+		vout-supply = <&L3C>;
+
 		lab-supply = <&ab_vreg>;
 		ibb-supply = <&ibb_vreg>;
 
 		qcom,mdp = <&mdss_mdp>;
-		qcom,dsi-default-panel = <&dsi_sw43404_amoled_video>;
+		qcom,dsi-default-panel = <&dsi_samsung_ams644vk04_ana6705_dsc_cmd>;
 	};
 
 	sde_dsi1: qcom,dsi-display-secondary {
@@ -224,10 +258,13 @@
 		qcom,platform-te-gpio = <&tlmm 11 0>;
 		qcom,panel-te-source = <1>;
 
-		vddio-supply = <&L1C>;
-		vdd-supply = <&L16A>;
+
+		//vddio-supply = <&L1C>;
+		//vdd-supply = <&L16A>;
+
 
 		qcom,mdp = <&mdss_mdp>;
+		qcom,dsi-default-panel = <&dsi_samsung_ams644vk04_ana6705_dsc_cmd>;
 	};
 
 	sde_wb: qcom,wb-display@0 {

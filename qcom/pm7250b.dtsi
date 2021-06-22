@@ -204,9 +204,9 @@
 					  "msg-rx-discarded",
 					  "fr-swap";
 
-			qcom,default-sink-caps = <5000 3000>, /* 5V @ 3A */
-						 <9000 3000>, /* 9V @ 3A */
-						 <12000 2250>; /* 12V @ 2.25A */
+			qcom,default-sink-caps = <5000 3000>; /* 5V @ 3A */
+						/* <9000 3000>, *//* 9V @ 3A */
+						/* <12000 2250>; *//* 12V @ 2.25A */
 		};
 
 		pm7250b_tz: qcom,temp-alarm@2400 {
@@ -621,7 +621,7 @@
 	};
 
 	soc {
-		polling-delay-passive = <100>;
+		polling-delay-passive = <5000>;
 		polling-delay = <0>;
 		thermal-governor = "low_limits_cap";
 		thermal-sensors = <&bcl_soc>;
@@ -630,10 +630,15 @@
 
 		trips {
 			soc_trip:soc-trip {
-				temperature = <10>;
+				temperature = <5>;
 				hysteresis = <0>;
 				type = "passive";
 			};
+			soc_trip2:soc-trip2 {
+                                temperature = <15>;
+                                hysteresis = <0>;
+                                type = "passive";
+                        };
 		};
 	};
 };

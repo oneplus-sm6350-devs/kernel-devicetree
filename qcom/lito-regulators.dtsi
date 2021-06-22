@@ -414,11 +414,13 @@
 		L16A: pm8150_l16: regulator-pm8150-l16 {
 			regulator-name = "pm8150_l16";
 			qcom,set = <RPMH_REGULATOR_SET_ALL>;
-			regulator-min-microvolt = <2600000>;
+			//LiPing-m@PSW.MM.Display.LCD 2018-10-21 Modity for lcd
+			regulator-min-microvolt = <3000000>;
 			regulator-max-microvolt = <3304000>;
 			qcom,proxy-consumer-enable;
 			qcom,proxy-consumer-current = <857000>;
-			qcom,init-voltage = <2600000>;
+			qcom,init-voltage = <3000000>;
+			//#endif
 			qcom,init-mode = <RPMH_REGULATOR_MODE_LPM>;
 		};
 	};
@@ -579,7 +581,8 @@
 			qcom,proxy-consumer-enable;
 			qcom,proxy-consumer-current = <62000>;
 			qcom,init-voltage = <1800000>;
-			qcom,init-mode = <RPMH_REGULATOR_MODE_LPM>;
+			//qcom,init-mode = <RPMH_REGULATOR_MODE_LPM>;
+			qcom,init-mode = <RPMH_REGULATOR_MODE_HPM>;
 		};
 	};
 
@@ -613,7 +616,7 @@
 			regulator-name = "pm8150a_l3";
 			qcom,set = <RPMH_REGULATOR_SET_ALL>;
 			regulator-min-microvolt = <1136000>;
-			regulator-max-microvolt = <1264000>;
+			regulator-max-microvolt = <1304000>;
 			qcom,init-voltage = <1136000>;
 			qcom,init-mode = <RPMH_REGULATOR_MODE_LPM>;
 		};
