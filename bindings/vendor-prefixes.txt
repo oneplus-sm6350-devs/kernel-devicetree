@@ -438,3 +438,6 @@ zidoo	Shenzhen Zidoo Technology Co., Ltd.
 zii	Zodiac Inflight Innovations
 zte	ZTE Corp.
 zyxel	ZyXEL Communications Corp.
+oneplus ONEPLUS Corp.
+oem,oem_serial_pinctrl oem oem_serial_pinctrl
+qcom,msm-geni-console-oem qcom msm-geni-console-oem
